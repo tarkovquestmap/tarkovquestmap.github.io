@@ -157,6 +157,13 @@
   /* 明るさコントロール */
   #brightctl{position:absolute;left:54px;top:56px;z-index:600;background:#000c;border:1px solid var(--line);border-radius:6px;padding:6px 9px;font-size:11px;display:flex;flex-direction:column;gap:5px}
   #brightctl .bcrow{display:flex;gap:8px;align-items:center}
+  #bcbody{display:flex;flex-direction:column;gap:5px}
+  #brightToggle{display:flex;align-items:center;gap:6px;padding:2px 4px;font-size:11px;background:none;border:0;color:var(--accent2);font-weight:700;text-align:left}
+  #brightToggle .bcarrow{margin-left:auto;color:var(--dim)}
+  #brightctl.min{padding:3px 6px}
+  #brightctl.min #bcbody,#brightctl.min .bctext{display:none}
+  #brightctl.min #brightToggle{padding:0}
+  #brightctl.min #brightToggle .bcarrow{margin-left:2px}
   #brightctl input[type=range]{width:80px}
   #brightctl button{padding:2px 6px;font-size:10px}
 
@@ -417,14 +424,17 @@
         <span class="sub" data-i18n="supportBtnSub">Thanks for using this tool!</span>
       </a>
       <div id="brightctl">
-        <div class="bcrow">
-          <span data-i18n="brightness">明るさ</span>
-          <input type="range" id="bright" min="0.4" max="1.6" step="0.05" value="1" title="マップの明るさ" data-i18n-title="brightnessTitle" />
-        </div>
-        <div class="bcrow">
-          <span data-i18n="contrast">コントラスト</span>
-          <input type="range" id="contrast" min="0.6" max="1.6" step="0.05" value="1" title="マップのコントラスト" data-i18n-title="contrastTitle" />
-          <button id="brightreset" data-i18n="reset">リセット</button>
+        <button id="brightToggle" type="button" aria-expanded="true" title="開く / 閉じる" data-i18n-title="brightToggleTitle"><span>🔆</span><span class="bctext" data-i18n="brightHead">明るさ・コントラスト</span><span class="bcarrow">▾</span></button>
+        <div id="bcbody">
+          <div class="bcrow">
+            <span data-i18n="brightness">明るさ</span>
+            <input type="range" id="bright" min="0.4" max="1.6" step="0.05" value="1" title="マップの明るさ" data-i18n-title="brightnessTitle" />
+          </div>
+          <div class="bcrow">
+            <span data-i18n="contrast">コントラスト</span>
+            <input type="range" id="contrast" min="0.6" max="1.6" step="0.05" value="1" title="マップのコントラスト" data-i18n-title="contrastTitle" />
+            <button id="brightreset" data-i18n="reset">リセット</button>
+          </div>
         </div>
       </div>
       <div id="raidtimer">
@@ -527,6 +537,7 @@ const STR = {
     optRoute:"巡回ルート番号（①②③…）", shareCreateBtn:"共有リンク作成", shareLoadBtn:"コード読込",
     exitSection:"脱出地点", hintFactionSelect:"今回の出撃タイプを選択", showAll:"全部表示", hideAll:"全部隠す",
     exitHint:(shown,total)=>`${shown} / ${total} 地点を表示中`, noExitData:"このマップの脱出データがありません",
+    brightHead:"明るさ・コントラスト", brightToggleTitle:"開く / 閉じる（最小化）",
     brightness:"明るさ", brightnessTitle:"マップの明るさ", contrast:"コントラスト", contrastTitle:"マップのコントラスト",
     reset:"リセット", raidStart:"レイド開始",
     guideTitle:"はじめての方へ",
@@ -741,6 +752,7 @@ const STR = {
     optRoute:"Route numbering (①②③…)", shareCreateBtn:"Create share link", shareLoadBtn:"Load code",
     exitSection:"Extracts", hintFactionSelect:"Select this raid's spawn type", showAll:"Show all", hideAll:"Hide all",
     exitHint:(shown,total)=>`Showing ${shown} / ${total} extracts`, noExitData:"No extract data for this map",
+    brightHead:"Brightness / contrast", brightToggleTitle:"Open / close (minimize)",
     brightness:"Brightness", brightnessTitle:"Map brightness", contrast:"Contrast", contrastTitle:"Map contrast",
     reset:"Reset", raidStart:"Start raid",
     guideTitle:"New here?",
@@ -2842,6 +2854,19 @@ document.getElementById("lvlin").onchange = (e) => {
 document.getElementById("bright").oninput = (e) => { view.bright = parseFloat(e.target.value); applyView(); saveView(); };
 document.getElementById("contrast").oninput = (e) => { view.contrast = parseFloat(e.target.value); applyView(); saveView(); };
 document.getElementById("brightreset").onclick = () => { view = { bright:1, contrast:1 }; applyView(); saveView(); };
+// 明るさ・コントラストの枠は最小化できる（保存あり。保存がなく画面が小さいときは最小化で始める）
+(function(){
+  const box = document.getElementById("brightctl"), btn = document.getElementById("brightToggle");
+  let saved = null; try{ saved = localStorage.getItem("eft_qm_bright_min_v1"); }catch(e){}
+  function setMin(min, keep){
+    box.classList.toggle("min", min);
+    btn.setAttribute("aria-expanded", String(!min));
+    btn.querySelector(".bcarrow").textContent = min ? "▸" : "▾";
+    if(keep){ try{ localStorage.setItem("eft_qm_bright_min_v1", min ? "1" : "0"); }catch(e){} }
+  }
+  setMin(saved === null ? (window.innerWidth <= 820 || window.innerHeight < 640) : saved === "1", false);
+  btn.onclick = () => setMin(!box.classList.contains("min"), true);
+})();
 // チップ(Ko-fi)の表示。寄付の受け取りが実装できるまで false（HTML側は data-tip + hidden で隠してある）。
 // 表示するときは true にする。README.md の「Support this project」も戻すこと。
 const SHOW_TIP = false;
