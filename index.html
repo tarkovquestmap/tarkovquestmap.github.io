@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>タルコフ クエストマップ</title>
-<meta name="description" content="Escape from Tarkov のクエスト目標と脱出地点を地図にピン表示する無料ツール。PvP / PvE / Seasonal 対応。Quest objectives and extracts on the map for Escape from Tarkov (free, PvP / PvE / Seasonal)." />
+<title>タルコフ タスクマップ</title>
+<meta name="description" content="Escape from Tarkov のタスク目標と脱出地点を地図にピン表示する無料ツール。PvP / PvE / Seasonal 対応。Quest objectives and extracts on the map for Escape from Tarkov (free, PvP / PvE / Seasonal)." />
 <link rel="canonical" href="https://tarkovquestmap.github.io/" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%97%BA%EF%B8%8F%3C/text%3E%3C/svg%3E" />
 <!-- SNS / Discord などにリンクを貼ったときのプレビュー -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Tarkov Quest Map" />
-<meta property="og:title" content="Tarkov Quest Map — クエスト目標＆脱出地点マップ" />
-<meta property="og:description" content="レイド前にクエストを選ぶと、目標と脱出地点が地図に出ます。PvP / PvE / Seasonal 対応・無料・インストール不要。Pick your quests and see objectives and extracts on the map." />
+<meta property="og:title" content="Tarkov Quest Map — タスク目標＆脱出地点マップ" />
+<meta property="og:description" content="レイド前にタスクを選ぶと、目標と脱出地点が地図に出ます。PvP / PvE / Seasonal 対応・無料・インストール不要。Pick your quests and see objectives and extracts on the map." />
 <meta property="og:url" content="https://tarkovquestmap.github.io/" />
 <meta property="og:image" content="https://tarkovquestmap.github.io/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Tarkov Quest Map — クエスト目標＆脱出地点マップ" />
-<meta name="twitter:description" content="レイド前にクエストを選ぶと、目標と脱出地点が地図に出ます。PvP / PvE / Seasonal 対応・無料・インストール不要。" />
+<meta name="twitter:title" content="Tarkov Quest Map — タスク目標＆脱出地点マップ" />
+<meta name="twitter:description" content="レイド前にタスクを選ぶと、目標と脱出地点が地図に出ます。PvP / PvE / Seasonal 対応・無料・インストール不要。" />
 <meta name="twitter:image" content="https://tarkovquestmap.github.io/og-image.png" />
 
 <!-- Leaflet (地図ライブラリ) -->
@@ -266,7 +266,7 @@
   <!-- ===== サイドバー ===== -->
   <aside id="sidebar">
     <div id="titlebar">
-      <h1 id="appTitle" data-i18n="appTitle">タルコフ クエストマップ</h1>
+      <h1 id="appTitle" data-i18n="appTitle">タルコフ タスクマップ</h1>
       <div class="row" style="flex-wrap:nowrap;gap:6px">
         <button id="helpBtn" class="hbtn" data-i18n="helpBtn">使い方</button>
         <button id="sbClose" class="narrow-only" data-i18n-title="closeMenu" title="閉じる">✕</button>
@@ -298,7 +298,7 @@
         <select id="mapSel"><option value="" data-i18n="mapAll">▼ マップ（すべて）</option></select>
       </div>
       <div class="row">
-        <input type="search" id="search" placeholder="クエスト名で検索…" data-i18n-placeholder="searchPlaceholder" />
+        <input type="search" id="search" placeholder="タスク名で検索…" data-i18n-placeholder="searchPlaceholder" />
       </div>
       <div class="row">
         <button id="selnone" data-i18n="clearSel">選択解除</button>
@@ -308,7 +308,7 @@
         <label class="chk"><span data-i18n="lvLabel">Lv</span> <input type="number" id="lvlin" min="1" max="79" value="15" /></label>
         <label class="chk"><input type="checkbox" id="showdone" /> <span data-i18n="showDone">完了も表示</span></label>
       </div>
-      <div class="row"><span id="selinfo" class="muted">0 クエスト選択中</span></div>
+      <div class="row"><span id="selinfo" class="muted">0 タスク選択中</span></div>
       <div class="row"><span id="progline"></span></div>
     </div>
 
@@ -436,11 +436,11 @@
         <div class="card">
           <h3 data-i18n="guideTitle">はじめての方へ</h3>
           <ol>
-            <li data-i18n-html="guideStep1">左上の <b>トレーダー</b> か <b>マップ</b> で絞り込み、今回やるクエストにチェック。</li>
+            <li data-i18n-html="guideStep1">左上の <b>トレーダー</b> か <b>マップ</b> で絞り込み、今回やるタスクにチェック。</li>
             <li data-i18n-html="guideStep2">上部のタブでマップを切り替え。地図上のピンにマウスを乗せると目標の説明が出ます。</li>
             <li data-i18n-html="guideStep3">左の <b>脱出地点</b> 欄で出撃タイプ(PMC/Scav)を選び、今回使う脱出地点にチェック → その地点だけ地図に出ます（緑=PMC / 青=Scav / 橙=共有）。</li>
             <li data-i18n-html="guideStep4">このウィンドウをサブディスプレイへ移動し、<b>F11</b> で全画面にすると見やすいです。</li>
-            <li data-i18n-html="guideStep5">ワイプ後や新クエスト追加時は左上の <b>データ更新</b> を押してください。</li>
+            <li data-i18n-html="guideStep5">ワイプ後や新タスク追加時は左上の <b>データ更新</b> を押してください。</li>
           </ol>
           <p class="muted" data-i18n="guideMore">詳しい説明は、サイドバー上部の「使い方」ボタンからいつでも見られます。</p>
           <button id="guideclose" class="primary" data-i18n="guideStart">はじめる</button>
@@ -481,10 +481,10 @@
 
 <script>
 /* ============================================================
-   タルコフ クエストマップ  (フェーズ1 / ローカル版)
+   タルコフ タスクマップ  (フェーズ1 / ローカル版)
 
    データ元 (すべて無料・非商用ライセンス):
-   - クエスト/脱出座標: tarkov.dev GraphQL API (api.tarkov.dev)
+   - タスク/脱出座標: tarkov.dev GraphQL API (api.tarkov.dev)
    - マップ画像(SVG):    tarkov.dev  (CC BY-NC-SA 4.0 / 作者: Shebuka ほか)
    座標投影ロジックは tarkov.dev (the-hideout/tarkov-dev, MIT) を踏襲。
 
@@ -500,7 +500,7 @@
 let LANG = localStorage.getItem("eft_qm_lang") || "ja";
 /* ゲームモード: PvP / PvE / Seasonal は別キャラ＝進行状況が別。
    PvP は従来のキー名のまま(既存データを引き継ぐ)、他は末尾に _pve / _seasonal を付けて分離する。
-   データ元: PvE は json.tarkov.dev/pve/*(クエスト・脱出地点・ボス等が別)、
+   データ元: PvE は json.tarkov.dev/pve/*(タスク・脱出地点・ボス等が別)、
    Seasonal は専用フィードが無いので regular(PvP)を使う。 */
 const MODES = ["pvp", "pve", "seasonal"];
 let MODE = "pvp";
@@ -509,9 +509,9 @@ const MK = base => MODE === "pvp" ? base : base + "_" + MODE;
 const DATA_SRC = MODE === "pve" ? "pve" : "regular";
 const STR = {
   ja: {
-    appTitle:"タルコフ クエストマップ", langToggleLabel:"EN",
+    appTitle:"タルコフ タスクマップ", langToggleLabel:"EN",
     refresh:"データ更新", traderAll:"▼ トレーダー（すべて）", mapAll:"▼ マップ（すべて）",
-    followCurrentMap:"【表示中のマップに追従】", searchPlaceholder:"クエスト名で検索…",
+    followCurrentMap:"【表示中のマップに追従】", searchPlaceholder:"タスク名で検索…",
     clearSel:"選択解除", kappaOnly:"Kappaのみ ★", lvLabel:"Lv", showDone:"完了も表示",
     supportLink:"☕ このツールをKo-fiで応援する", supportBtn:"☕ 応援する (Tip)",
     supportBtnTitle:"使ってくれてありがとうございます！このツールはこれからもずっと無料です。もし役に立ったら、Ko-fiでの応援が励みになります(任意です、無理のない範囲で)。",
@@ -525,18 +525,18 @@ const STR = {
     brightness:"明るさ", brightnessTitle:"マップの明るさ", contrast:"コントラスト", contrastTitle:"マップのコントラスト",
     reset:"リセット", raidStart:"レイド開始",
     guideTitle:"はじめての方へ",
-    guideStep1:"左上の <b>トレーダー</b> か <b>マップ</b> で絞り込み、今回やるクエストにチェック。",
+    guideStep1:"左上の <b>トレーダー</b> か <b>マップ</b> で絞り込み、今回やるタスクにチェック。",
     guideStep2:"上部のタブでマップを切り替え。地図上のピンにマウスを乗せると目標の説明が出ます。",
     guideStep3:"左の <b>脱出地点</b> 欄で出撃タイプ(PMC/Scav)を選び、今回使う脱出地点にチェック → その地点だけ地図に出ます（緑=PMC / 青=Scav / 橙=共有）。",
     guideStep4:"このウィンドウをサブディスプレイへ移動し、<b>F11</b> で全画面にすると見やすいです。",
-    guideStep5:"ワイプ後や新クエスト追加時は左上の <b>データ更新</b> を押してください。",
+    guideStep5:"ワイプ後や新タスク追加時は左上の <b>データ更新</b> を押してください。",
     guideStart:"はじめる", loadingInitial:"データを読み込んでいます…",
     multipleOrNone:"複数/なし", doneBadge:"✓済(自分)", markDoneTitle:"完了マーク",
     searchPrefix:mn=>`検索: ${mn}`, searchResults:"検索結果", noMatch:"該当なし", selectedHeader:"選択中",
-    filterHint:"上の「トレーダー」または「マップ」で絞り込むと、クエストが名前（ABC）順で出ます。クエスト名の直接検索も可。",
-    availableNow:"▶ 今すぐ受注できる", noQuestsToShow:"表示できるクエストがありません（絞り込み条件を確認）",
+    filterHint:"上の「トレーダー」または「マップ」で絞り込むと、タスクが名前（ABC）順で出ます。タスク名の直接検索も可。",
+    availableNow:"▶ 今すぐ受注できる", noQuestsToShow:"表示できるタスクがありません（絞り込み条件を確認）",
     labelSep:" ／ ",
-    selCount:n=>`${n} クエスト選択中`,
+    selCount:n=>`${n} タスク選択中`,
     progressDone:(dn,total)=>`完了 <b>${dn}</b>/${total}`,
     progressKappa:(kapDn,kapAll)=>` ・ Kappa必須 <b>${kapDn}</b>/${kapAll}`,
     progressLK:(lkDn,lkAll)=>` ・ Lightkeeper <b>${lkDn}</b>/${lkAll}`,
@@ -554,13 +554,13 @@ const STR = {
     spawnPoint:"スポーン地点", sideOther:s=>s,
     optionalTag:" (任意)", conditionsLabel:"条件: ",
     noCoordHeader:"このマップ・座標データなし (Wiki確認)",
-    noQuestSelected:"クエスト未選択",
+    noQuestSelected:"タスク未選択",
     legendSniper:"スナイパー射線", legendMinefield:"地雷原", legendOtherHazard:"その他危険",
     legendLockedDoor:"施錠ドア", legendSwitch:"スイッチ", legendBoss:"ボス出現",
     legendPmcSpawn:"PMCスポーン", legendScavSpawn:"Scavスポーン", legendRoute:"— — 巡回ルート(番号順)",
     legendToggle:open=>`凡例 ${open?"▲":"▼"}`,
     legendExitLine:fac=>`脱出（今回: <b>${fac==="scav"?"Scav":"PMC"}</b>出撃）: <span class="dot" style="background:var(--ok)"></span>PMC&nbsp; <span class="dot" style="background:var(--scav)"></span>Scav&nbsp; <span class="dot" style="background:var(--shared)"></span>共同(両方必要) — 「脱出地点」欄でチェックした地点のみ表示。階層バッジ付き=別フロアの脱出口`,
-    legendMarkerLine:'<span class="dot" style="background:#888"></span>丸=クエスト目標(記号A/B..)　📌=自分のメモ(右クリックで追加)',
+    legendMarkerLine:'<span class="dot" style="background:#888"></span>丸=タスク目標(記号A/B..)　📌=自分のメモ(右クリックで追加)',
     legendHazardLine:"破線で囲った範囲=危険地帯。範囲内に入ると危険",
     legendColorLine:"地図の色（tarkov.dev提供）: 濃い灰=建物内 / 斜線=階段・スロープ / 水色=水場 / 破線=マップ境界",
     prereqLabel:"前提: ", nextLabel:"次: ", andMore:" ほか",
@@ -570,7 +570,7 @@ const STR = {
     shareLoadedAlert:"共有データを読み込みました。",
     shareLoadFailedAlert:msg=>`読み込み失敗: ${msg}`,
     ttBtn:"TarkovTracker取込", ttTitle:"TarkovTracker の進捗を取り込む",
-    ttHow:"<ol><li>TarkovTracker（tarkovtracker.org）の設定画面で、進捗の<b>バックアップ（エクスポート）</b>JSONを保存</li><li>そのファイルを下で選ぶか、中身を貼り付け</li></ol>クエストの完了・失敗・達成済みの目標と、レベルを反映できます。",
+    ttHow:"<ol><li>TarkovTracker（tarkovtracker.org）の設定画面で、進捗の<b>バックアップ（エクスポート）</b>JSONを保存</li><li>そのファイルを下で選ぶか、中身を貼り付け</li></ol>タスクの完了・失敗・達成済みの目標と、レベルを反映できます。",
     ttPrivacy:"🔒 ファイルはこの端末のブラウザ内だけで処理され、どこにも送信されません。",
     ttPasteLabel:"または JSON の中身を貼り付け:",
     ttErrJson:"JSONとして読めませんでした。バックアップファイルか確認してください。",
@@ -578,8 +578,8 @@ const STR = {
     ttErrEmpty:"取り込める進捗データがありません。",
     modeLabel:"ゲームモード", modePvp:"PvP", modePve:"PvE", modeSeasonal:"Seasonal",
     modeHintPvp:"通常のPvPキャラ。完了・レベルなどの進行状況はモードごとに別保存です。",
-    modeHintPve:"PvEキャラ。PvE専用のクエスト・脱出地点・ボスのデータに切り替わります（進行状況はPvPと別保存）。",
-    modeHintSeasonal:"シーズン用キャラ（PvP・ワイプあり）。通常クエストはPvPと同じデータです。季節限定のKord Breachクエストはデータ未対応。進行状況は別保存。",
+    modeHintPve:"PvEキャラ。PvE専用のタスク・脱出地点・ボスのデータに切り替わります（進行状況はPvPと別保存）。",
+    modeHintSeasonal:"シーズン用キャラ（PvP・ワイプあり）。通常タスクはPvPと同じデータです。季節限定のKord Breachタスクはデータ未対応。進行状況は別保存。",
     ttTarget:(n,cur)=>cur ? `取り込み先: <b>${n}</b>（いま表示中のモード）` : `取り込み先: <b>${n}</b>（いま表示中のモードとは別。切り替えると反映されます）`,
     ttOtherMode:(n)=>`「${n}」モードに保存しました。上の切替ボタンで ${n} にすると反映されます。`,
     ttEmptyProfile:"この取込元には進捗が入っていません。上の「取り込むモード」で、進捗が入っているモードを選んでください。",
@@ -589,7 +589,7 @@ const STR = {
     fbLink:"💬 ご意見・不具合報告", fbBtn:"ご意見・不具合報告", fbTitle:"ご意見・不具合報告",
     fbIntro:"欲しい機能・困ったこと・不具合をお知らせください。内容は<b>開発者だけが見られます</b>（公開されません）。ログインや名前・メールアドレスは不要です。個人情報は書かないでください。返信できない場合があります。",
     fbTypeIdea:"💡 要望", fbTypeBug:"🐞 不具合", fbTypeOther:"💬 その他",
-    fbMsgLabel:"内容", fbMsgPh:"例: 〇〇のクエストのピンが違う場所に出ます／〇〇の機能が欲しいです",
+    fbMsgLabel:"内容", fbMsgPh:"例: 〇〇のタスクのピンが違う場所に出ます／〇〇の機能が欲しいです",
     fbInfoLabel:"一緒に送られる情報（確認できます）",
     fbCopy:"内容をコピー", fbSend:"送信", fbCopied:"コピーしました。", fbEmpty:"内容を入力してください。",
     fbSent:"送信しました。ご意見ありがとうございます！", fbSending:"送信しています…", fbWait:"続けて送るときは、少し待ってからお願いします。", fbSendErr:"送信できませんでした。通信を確認するか、下の「フォームを直接開く」から送ってください。", fbDirect:"フォームを直接開く",
@@ -597,24 +597,24 @@ const STR = {
     helpBody:`
 <details open><summary>1. まずはこの順番で</summary><div><ol>
 <li>左上の <b>ゲームモード</b>（PvP / PvE / Seasonal）を、自分が遊んでいるモードに合わせる。</li>
-<li>左のサイドバーで <b>トレーダー</b> か <b>マップ</b> を選んで絞り込み、<b>今回のレイドでやるクエスト</b>にチェックを入れる。</li>
-<li>上のタブでマップを切り替えると、選んだクエストの目標が<b>ピン</b>で地図に出る。ピンにマウスを乗せると、目標の説明・条件・前提クエスト・次のクエストが見える。</li>
+<li>左のサイドバーで <b>トレーダー</b> か <b>マップ</b> を選んで絞り込み、<b>今回のレイドでやるタスク</b>にチェックを入れる。</li>
+<li>上のタブでマップを切り替えると、選んだタスクの目標が<b>ピン</b>で地図に出る。ピンにマウスを乗せると、目標の説明・条件・前提タスク・次のタスクが見える。</li>
 <li>左の <b>脱出地点</b> 欄で、今回使う脱出地点にチェックを入れる（→ 5.）。</li>
 <li>ウィンドウをサブディスプレイへ動かし、<span class="k">F11</span> で全画面にすると見やすい。</li>
 </ol></div></details>
 
 <details><summary>2. ゲームモード（PvP / PvE / Seasonal）</summary><div>
-<p>ゲーム側でキャラが別なので、このツールも<b>モードごとに進行状況を別々に保存</b>します（完了・失敗・レベル・選んだクエスト・脱出地点の選択）。ボタンを押すとページが読み込み直されます。</p>
+<p>ゲーム側でキャラが別なので、このツールも<b>モードごとに進行状況を別々に保存</b>します（完了・失敗・レベル・選んだタスク・脱出地点の選択）。ボタンを押すとページが読み込み直されます。</p>
 <ul>
 <li><b>PvP</b>: 通常のPvPキャラ。</li>
-<li><b>PvE</b>: PvE専用のクエスト（[PVE ZONE]）・脱出地点・ボス・スポーンのデータに切り替わる。</li>
-<li><b>Seasonal</b>: シーズン用キャラ（ワイプあり）。専用データが公開されていないため、通常クエストはPvPと同じデータを使う。<b>季節限定の Kord Breach クエストは未対応</b>。</li>
+<li><b>PvE</b>: PvE専用のタスク（[PVE ZONE]）・脱出地点・ボス・スポーンのデータに切り替わる。</li>
+<li><b>Seasonal</b>: シーズン用キャラ（ワイプあり）。専用データが公開されていないため、通常タスクはPvPと同じデータを使う。<b>季節限定の Kord Breach タスクは未対応</b>。</li>
 </ul></div></details>
 
 <details><summary>3. 地図の見方</summary><div><ul>
-<li><b>階ボタン</b>（地図の上）: 複数階のマップで階を切り替える。上の階を見るときは、1階が薄く下敷きで出るので位置がつかみやすい。ボタンの数字は、その階にある選択クエストのピン数。</li>
-<li><b>ピンの色と文字</b>: クエストごとに色と記号（A・B・C…）が付く。左のクエスト一覧の同じ記号と対応している。</li>
-<li><b>📍ボタン</b>（クエスト一覧の各行）: 押すと、そのクエストを選択して、必要ならマップと階を切り替え、ピンが見える位置へ地図を移動する（ピンの周りに輪が一瞬出る）。</li>
+<li><b>階ボタン</b>（地図の上）: 複数階のマップで階を切り替える。上の階を見るときは、1階が薄く下敷きで出るので位置がつかみやすい。ボタンの数字は、その階にある選択タスクのピン数。</li>
+<li><b>ピンの色と文字</b>: タスクごとに色と記号（A・B・C…）が付く。左のタスク一覧の同じ記号と対応している。</li>
+<li><b>📍ボタン</b>（タスク一覧の各行）: 押すと、そのタスクを選択して、必要ならマップと階を切り替え、ピンが見える位置へ地図を移動する（ピンの周りに輪が一瞬出る）。</li>
 <li><b>凡例</b>: 地図の左下の「凡例 ▼」で、記号や色の意味が見られる。</li>
 <li><b>表示レイヤー</b>: 左の「表示レイヤー・共有」で、トランジット・危険地帯・施錠ドア・スイッチ・ボス・スポーンの表示を切り替える。</li>
 <li><b>巡回ルート番号</b>: チェックすると、ピンに①②③…と回る順番の番号が付き、最短順に線でつながる。</li>
@@ -622,14 +622,14 @@ const STR = {
 <li><b>明るさ・コントラスト</b>: 地図の左上のスライダーで調整。</li>
 </ul></div></details>
 
-<details><summary>4. クエスト一覧のマークと完了管理</summary><div><ul>
-<li><span class="k">★</span> … Kappa（Kappa container）の入手に必要なクエスト。「Kappaのみ ★」で絞り込める。</li>
-<li><span class="k">○ / ✓</span> … クリックで完了にする／戻す。完了したクエストは一覧から自動で隠れ、「完了も表示」で見られる。</li>
-<li><span class="k">⚠</span> … 失敗条件があるクエスト（マウスを乗せる／クエストを選ぶと内容が出る）。特に<b>排他クエスト</b>（片方を完了すると他方が失敗する）の名前も出る。</li>
-<li><span class="k">✗排他で不可</span> … 排他の相手をすでに完了しているので、もう受けられないクエスト。一覧から隠れ、「今すぐ受注できる」にも出ない。</li>
-<li><span class="k">✗失敗</span> … 失敗したクエスト（TarkovTracker取込で付く）。一覧から隠れ、「今すぐ受注できる」にも出ない。</li>
-<li><b>Lv</b> 欄に自分のレベルを入れると、「<b>▶ 今すぐ受注できる</b>」に、前提クエストを終えていてレベルも足りているクエストが出る。</li>
-<li>フレンドと協力して遊ぶとき、<b>自分で選んだクエスト</b>と<b>共有リンクで受け取ったクエスト</b>は、完了済みでも隠れず「✓済」の表示で残る。</li>
+<details><summary>4. タスク一覧のマークと完了管理</summary><div><ul>
+<li><span class="k">★</span> … Kappa（Kappa container）の入手に必要なタスク。「Kappaのみ ★」で絞り込める。</li>
+<li><span class="k">○ / ✓</span> … クリックで完了にする／戻す。完了したタスクは一覧から自動で隠れ、「完了も表示」で見られる。</li>
+<li><span class="k">⚠</span> … 失敗条件があるタスク（マウスを乗せる／タスクを選ぶと内容が出る）。特に<b>排他タスク</b>（片方を完了すると他方が失敗する）の名前も出る。</li>
+<li><span class="k">✗排他で不可</span> … 排他の相手をすでに完了しているので、もう受けられないタスク。一覧から隠れ、「今すぐ受注できる」にも出ない。</li>
+<li><span class="k">✗失敗</span> … 失敗したタスク（TarkovTracker取込で付く）。一覧から隠れ、「今すぐ受注できる」にも出ない。</li>
+<li><b>Lv</b> 欄に自分のレベルを入れると、「<b>▶ 今すぐ受注できる</b>」に、前提タスクを終えていてレベルも足りているタスクが出る。</li>
+<li>フレンドと協力して遊ぶとき、<b>自分で選んだタスク</b>と<b>共有リンクで受け取ったタスク</b>は、完了済みでも隠れず「✓済」の表示で残る。</li>
 </ul></div></details>
 
 <details><summary>5. 脱出地点の選び方</summary><div>
@@ -637,46 +637,46 @@ const STR = {
 </div></details>
 
 <details><summary>6. レイド前チェック</summary><div>
-<p>左の「レイド前チェック」に、選んだクエストに必要なものが出ます。行のチェックボックスは保存されます（「リセット」で全部外せる）。</p>
+<p>左の「レイド前チェック」に、選んだタスクに必要なものが出ます。行のチェックボックスは保存されます（「リセット」で全部外せる）。</p>
 <ul><li>🔑 持ち込む鍵　／　📤 設置・持ち込むアイテム　／　📥 現地で回収するアイテム（FiR＝レイド内で入手が必要）</li></ul>
 <p>マップ上部の<b>レイドタイマー</b>で、そのマップの制限時間が数えられます（残り5分で黄、2分で赤）。</p>
 </div></details>
 
 <details><summary>7. ストーリー章</summary><div>
-<p>トレーダー系のクエストとは別に、ストーリー章（Tour / Falling Skies / Batya / The Unheard / Blue Fire / They Are Already Here / Accidental Witness / The Labyrinth / The Ticket / Boreas）の<b>目標チェックリスト</b>があります。左の <b>「ストーリー」</b> を開くと、章ごとに目標が並びます。</p>
+<p>トレーダー系のタスクとは別に、ストーリー章（Tour / Falling Skies / Batya / The Unheard / Blue Fire / They Are Already Here / Accidental Witness / The Labyrinth / The Ticket / Boreas）の<b>目標チェックリスト</b>があります。左の <b>「ストーリー」</b> を開くと、章ごとに目標が並びます。</p>
 <ul>
 <li>チェックを入れて進み具合を記録できます（モードごとに別保存）。「主要な目標を全部完了」「全部解除」ボタンもあります。</li>
 <li>ストーリーの目標は<b>座標データがないため、地図にはピンが出ません</b>。説明はゲーム表記の英語です。</li>
-<li>トレーダー系クエストのうち、ストーリーの目標が条件になっているものには <span class="k">📖</span> が付きます（未達成は名前が出る／達成済みは ✓）。</li>
+<li>トレーダー系タスクのうち、ストーリーの目標が条件になっているものには <span class="k">📖</span> が付きます（未達成は名前が出る／達成済みは ✓）。</li>
 <li>TarkovTracker取込で、章の完了も反映されます。</li>
 </ul></div></details>
 
 <details><summary>8. TarkovTracker取込</summary><div>
-<p>すでに TarkovTracker に進行状況を記録している人向け。完了クエスト・失敗クエスト・達成済みの目標・レベルを、まとめて反映できます。</p>
+<p>すでに TarkovTracker に進行状況を記録している人向け。完了タスク・失敗タスク・達成済みの目標・レベルを、まとめて反映できます。</p>
 <ol>
 <li>TarkovTracker（tarkovtracker.org）の設定画面で、バックアップ（エクスポート）の <b>.json</b> を保存する。</li>
 <li>このツールの「表示レイヤー・共有」を開き、<b>TarkovTracker取込</b> を押してファイルを選ぶ（貼り付けでも可）。</li>
 <li>内容を確認して<b>取り込む</b>。「追加のみ／上書き」を選べて、直後なら「元に戻す」もできる。</li>
 </ol>
-<p>ファイルはブラウザの中だけで処理され、どこにも送信されません。取込先は、ファイルの中から選んだ<b>取込元のモードと同じモード</b>です（PvEの進捗はPvEに保存。いま表示中のモードと違えば、切り替えると反映されます）。使っていない人は無視して大丈夫（クエストは ○/✓ で手動でも管理できます）。</p>
+<p>ファイルはブラウザの中だけで処理され、どこにも送信されません。取込先は、ファイルの中から選んだ<b>取込元のモードと同じモード</b>です（PvEの進捗はPvEに保存。いま表示中のモードと違えば、切り替えると反映されます）。使っていない人は無視して大丈夫（タスクは ○/✓ で手動でも管理できます）。</p>
 </div></details>
 
 <details><summary>9. 共有リンク</summary><div>
-<p>「共有リンク作成」で、いまの状態（モード・選んだクエスト・完了・レベル・カスタムピン・マップ・脱出地点）をURLにしてコピーできます。フレンドがそのURLを開く、または「コード読込」に貼り付けると同じ状態になります。失敗クエストと達成済みの目標は共有されません。</p>
+<p>「共有リンク作成」で、いまの状態（モード・選んだタスク・完了・レベル・カスタムピン・マップ・脱出地点）をURLにしてコピーできます。フレンドがそのURLを開く、または「コード読込」に貼り付けると同じ状態になります。失敗タスクと達成済みの目標は共有されません。</p>
 </div></details>
 
 <details><summary>10. データ更新・困ったとき</summary><div><ul>
-<li><b>データ更新</b>: ワイプ後や新クエスト追加時に押す。クエスト・脱出地点・ボス位置などを最新にする（1日1回は自動で更新）。</li>
+<li><b>データ更新</b>: ワイプ後や新タスク追加時に押す。タスク・脱出地点・ボス位置などを最新にする（1日1回は自動で更新）。</li>
 <li>データが読めないとき: ネットを確認して「データ更新」。取得できない場合は同梱のデータで動き、「⚠古い」と表示されます。</li>
 <li>地図が真っ黒: 画像サーバーが混んでいます。少し待って再読み込み。</li>
 <li>地図の絵が新しいレイアウトと違う（例: Lighthouse）: 地図の絵は tarkov.dev が更新するまで古いままです。地図の上にお知らせが出ます。</li>
-<li>クエスト名・アイテム名・マップ名・脱出地点名は、ゲームの表記どおり英語で表示します。</li>
+<li>タスク名・アイテム名・マップ名・脱出地点名は、ゲームの表記どおり英語で表示します。</li>
 <li>欲しい機能・不具合・ご意見は、サイドバーの「💬 ご意見・不具合報告」（またはこのウィンドウ下のボタン）から送れます。</li>
 </ul></div></details>
 
 <p class="muted">このツールはゲームに一切アクセスしません（メモリ読取り・注入なし）。tarkov.dev の公開データと地図を使っています（地図: CC BY-NC-SA 4.0）。</p>`,
     ttModeLabel:"取り込むモード:", ttModePvp:"PvP", ttModePve:"PvE", ttModeSeasonal:"Seasonal",
-    ttSummary:(lv,c,cKnown,f,o,s)=>`レベル <b>${lv||"-"}</b> ／ 完了クエスト <b>${c}</b> 件（このツールで認識 ${cKnown} 件）／ 失敗 <b>${f}</b> 件 ／ 達成済みの目標 <b>${o}</b> 件 ／ ストーリーの目標 <b>${s}</b> 件`,
+    ttSummary:(lv,c,cKnown,f,o,s)=>`レベル <b>${lv||"-"}</b> ／ 完了タスク <b>${c}</b> 件（このツールで認識 ${cKnown} 件）／ 失敗 <b>${f}</b> 件 ／ 達成済みの目標 <b>${o}</b> 件 ／ ストーリーの目標 <b>${s}</b> 件`,
     storySection:"ストーリー", storyHint:"ストーリー章の目標チェックリストです（座標データがないため地図には出ません）。目標の説明はゲーム表記の英語です。",
     storyNone:"ストーリーのデータを取得できませんでした（「データ更新」を押してください）。", storyOptional:"任意",
     storyDoneAll:"主要な目標を全部完了", storyClear:"全部解除", storyReqLabel:"ストーリーの目標が条件:",
@@ -686,7 +686,7 @@ const STR = {
     ttDoneMsg:(c,f,o,s)=>`取り込みました: 完了 ${c} 件 ／ 失敗 ${f} 件 ／ 目標 ${o} 件 ／ ストーリー ${s} 件`,
     ttUndoneMsg:"元に戻しました。",
     failBadge:"✗失敗", lockedBadge:"✗排他で不可",
-    failExclusive:(n)=>`次のクエストを完了すると、このクエストは失敗します: ${n}`,
+    failExclusive:(n)=>`次のタスクを完了すると、このタスクは失敗します: ${n}`,
     failGenShoot:"特定の相手を倒すと失敗する条件があります", failGenStanding:"トレーダーの信頼度の条件で失敗する場合があります",
     failGenPlant:"アイテム設置に関する失敗条件があります", failGenUse:"アイテム使用に関する失敗条件があります",
     failGenExtract:"死亡またはレイド離脱（脱出以外）で失敗する条件があります", failGenVisit:"失敗条件があります", failGenOther:"失敗条件があります",
@@ -713,13 +713,13 @@ const STR = {
     condTimeRange:(a,b)=>`${a}時〜${b}時`, condKillCount:n=>`キル×${n}`,
     attrErgo:"エルゴ", attrAccuracy:"精度(MOA)", attrDurability:"耐久", attrRecoilV:"縦リコイル",
     attrRecoilH:"横リコイル", attrWeight:"重量", attrEffDist:"有効射程", attrMagCap:"装弾数", attrMuzzleV:"初速",
-    objVisit:"到達・訪問", objFindItem:"アイテム発見", objFindQuestItem:"クエストアイテム回収",
-    objGiveItem:"アイテム納品", objGiveQuestItem:"クエストアイテム納品", objPlantItem:"アイテム設置",
-    objPlantQuestItem:"クエストアイテム設置", objMark:"マーカー設置", objShoot:"排除(キル)",
+    objVisit:"到達・訪問", objFindItem:"アイテム発見", objFindQuestItem:"タスクアイテム回収",
+    objGiveItem:"アイテム納品", objGiveQuestItem:"タスクアイテム納品", objPlantItem:"アイテム設置",
+    objPlantQuestItem:"タスクアイテム設置", objMark:"マーカー設置", objShoot:"排除(キル)",
     objExtract:"指定地点から脱出", objBuildWeapon:"武器を組む", objUseItem:"アイテム使用",
     objSellItem:"フリマ出品", objExperience:"特定状況の達成", objSkill:"スキル到達",
     objTraderLevel:"トレーダーLL", objTraderStanding:"トレーダー信頼度",
-    objTaskStatus:"他クエストの状態", objDialogue:"会話", objGlobalVariable:"進行フラグ",
+    objTaskStatus:"他タスクの状態", objDialogue:"会話", objGlobalVariable:"進行フラグ",
   },
   en: {
     appTitle:"EFT Quest Map", langToggleLabel:"日本語",
@@ -1061,7 +1061,7 @@ const canonMap = m => m ? (MAP_ALIAS[m] || m) : m;
    ピン位置(座標変換)には影響しない。tarkov.dev が新しい絵を公開したらここを消す。 */
 const MAP_ART_NOTE = {
   lighthouse: {
-    ja: { text: "この地図の絵は 1.1.5.0 ライトハウス改修前のレイアウトです（tarkov.dev 未更新）。クエスト座標データ自体は最新。", linkText: "最新レイアウト参考(reemr.se)" },
+    ja: { text: "この地図の絵は 1.1.5.0 ライトハウス改修前のレイアウトです（tarkov.dev 未更新）。タスク座標データ自体は最新。", linkText: "最新レイアウト参考(reemr.se)" },
     en: { text: "This map's art is still the pre-1.1.5.0 Lighthouse layout (tarkov.dev hasn't updated it yet). Quest coordinate data itself is current.", linkText: "Reference layout (reemr.se)" },
     url: "https://reemr.se/Lighthouse/",
   },
@@ -1175,7 +1175,7 @@ const VIEW_KEY  = "eft_qm_view_v1";   // 明るさ等の表示設定
 const GUIDE_KEY = "eft_qm_guide_seen_v1";
 const PIN_KEY   = "eft_qm_pins_v1";   // カスタムピン { mapNN: [{lat,lng,text}] }
 const CHECK_KEY = MK("eft_qm_checks_v1"); // 持ち物チェック { mapNN: { itemId: 1 } }
-const DONE_KEY  = MK("eft_qm_done_v1");   // 完了クエスト { taskId: 1 }
+const DONE_KEY  = MK("eft_qm_done_v1");   // 完了タスク { taskId: 1 }
 const LEVEL_KEY = MK("eft_qm_level_v1");  // プレイヤーレベル
 const CACHE_TTL = 1000*60*60*24; // 24h
 
@@ -1202,7 +1202,7 @@ async function fetchData(){
   const has = (o,k) => k != null && o[k] != null && o[k] !== "";
   const tEN = k => has(en,k) ? en[k] : k;            // 英語(ゲーム表記)
   const tJA = k => has(ja,k) ? ja[k] : tEN(k);       // 日本語 → 英語 → キー
-  // アイテム(鍵/クエストアイテム)解決。名前は英語(ゲーム表記)のまま。
+  // アイテム(鍵/タスクアイテム)解決。名前は英語(ゲーム表記)のまま。
   const itemName  = id => has(ien, id + " Name") ? ien[id + " Name"] : (has(en, id + " Name") ? en[id + " Name"] : id);
   const itemShort = id => has(ien, id + " ShortName") ? ien[id + " ShortName"] : itemName(id);
   const mkItem = id => ({ id, name: itemName(id), short: itemShort(id) });
@@ -1260,7 +1260,7 @@ async function fetchData(){
     });
   }
 
-  // クエストアイテム解決
+  // タスクアイテム解決
   const rawQI = (tasksR && tasksR.data && tasksR.data.questItems) || {};
   const qiItem = id => {
     const qi = rawQI[id];
@@ -1329,7 +1329,7 @@ async function fetchData(){
       map: { normalizedName: mid2nn[nk.map] },
       keys: (nk.keys || []).map(mkItem),
     }));
-    // 失敗条件: 排他クエスト(このクエスト自体は、指定クエストを完了すると失敗する) と 文章の条件
+    // 失敗条件: 排他タスク(このタスク自体は、指定タスクを完了すると失敗する) と 文章の条件
     const failConditions = [], seenFailTask = new Set();
     for(const c of (t.failConditions || [])){
       if(c.type === "taskStatus"){
@@ -1358,7 +1358,7 @@ async function fetchData(){
 
   if(!tasks.length) throw new Error(T("noTaskData"));
 
-  // ストーリー章: 章ごとの目標リスト + 「ストーリー目標が条件」のトレーダー系クエスト
+  // ストーリー章: 章ごとの目標リスト + 「ストーリー目標が条件」のトレーダー系タスク
   let story = null;
   if(overlayR && overlayR.storyChapters && typeof overlayR.storyChapters === "object"){
     const chapters = Object.values(overlayR.storyChapters)
@@ -1418,25 +1418,25 @@ let MAPMETA  = {};               // normalizedName -> {raidDuration,players}
 let selected = new Set(loadSel());// 選択タスクID
 let done = new Set(loadDone());   // 完了タスクID
 let plvl = parseInt(localStorage.getItem(LEVEL_KEY) || "15", 10) || 15;
-let showDone = false;             // 完了クエストも一覧表示
+let showDone = false;             // 完了タスクも一覧表示
 let opts = loadOpts();
 
 function loadDone(){ try{ return JSON.parse(localStorage.getItem(DONE_KEY)) || []; }catch(e){ return []; } }
 function saveDone(){ try{ localStorage.setItem(DONE_KEY, JSON.stringify([...done])); }catch(e){} }
 const isDone = id => done.has(id);
-// TarkovTracker 取込で入る「失敗クエスト」「達成済みの目標」
+// TarkovTracker 取込で入る「失敗タスク」「達成済みの目標」
 const FAILED_KEY = MK("eft_qm_failed_v1"), OBJDONE_KEY = MK("eft_qm_objdone_v1"), TTUNDO_KEY = MK("eft_qm_tt_undo_v1");
 function loadIdSet(k){ try{ const a = JSON.parse(localStorage.getItem(k)); return new Set(Array.isArray(a) ? a : []); }catch(e){ return new Set(); } }
 function saveIdSet(k, s){ try{ localStorage.setItem(k, JSON.stringify([...s])); }catch(e){} }
-let failed = loadIdSet(FAILED_KEY);     // 失敗したクエストID
+let failed = loadIdSet(FAILED_KEY);     // 失敗したタスクID
 let doneObjs = loadIdSet(OBJDONE_KEY);  // 達成済みの目標ID（地図から隠す）
 const STORY_KEY = MK("eft_qm_story_v1");
 let storyDone = loadIdSet(STORY_KEY);   // 達成済みのストーリー目標ID（キャラ=モードごとに別）
 const isFailed = id => failed.has(id);
-// 排他クエスト: このクエストを失敗させる相手を、すでに完了している（= 実質もう受けられない）
+// 排他タスク: このタスクを失敗させる相手を、すでに完了している（= 実質もう受けられない）
 const lockedOut = t => (t.fails || []).some(f => f.type === "task" && done.has(f.id));
 const objHidden = o => !showDone && !!o && doneObjs.has(o.id);
-// 前提クエスト完了 かつ レベル達成 で受注可能
+// 前提タスク完了 かつ レベル達成 で受注可能
 function isAvailable(t){
   if(failed.has(t.id) || lockedOut(t)) return false;
   if(t.lvl && plvl < t.lvl) return false;
@@ -1633,7 +1633,7 @@ function prepTasks(rawTasks){
   });
 }
 
-/* ---------- クエスト連鎖の逆引き ---------- */
+/* ---------- タスク連鎖の逆引き ---------- */
 let NAME_OF = {};   // taskId -> name
 let NEXT_OF = {};    // taskId -> [後続タスクid]
 function buildChain(){
@@ -1645,8 +1645,8 @@ function buildChain(){
     }
   }
 }
-// 失敗条件の表示（⚠）。排他クエスト名と、条件の文章
-// ストーリー目標が条件のクエスト（📖）
+// 失敗条件の表示（⚠）。排他タスク名と、条件の文章
+// ストーリー目標が条件のタスク（📖）
 function escH(s){ return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
 function storyReqLines(t){
   return (t.storyReq || []).map(r => `${storyDone.has(r.obj) ? "✓" : "…"} ${r.chapterName}: ${r.text}`);
@@ -1753,7 +1753,7 @@ function questRow(t){
   return row;
 }
 
-/* ---------- 一覧の 📍 → そのクエストのピンへ地図を移動 ----------
+/* ---------- 一覧の 📍 → そのタスクのピンへ地図を移動 ----------
    未選択なら選択に加え、必要ならマップタブ・階を切り替え、ピンが収まるようにズームする。 */
 let toastTimer = null;
 function toast(msg){
@@ -1784,7 +1784,7 @@ async function focusQuest(t){
     refreshFloors();
   }
   const md = MAPBY[curMap];
-  // このクエストのピンが最も多い階へ切り替え
+  // このタスクのピンが最も多い階へ切り替え
   if(md.floors){
     const fc = md.floors.map(() => 0);
     for(const m of t.byMap[curMap].filter(shown)){ const fi = floorIndexOf(m.pos ? m.pos.y : null, md.floors); if(fi >= 0) fc[fi]++; }
@@ -1844,7 +1844,7 @@ function renderQuestList(){
     return;
   }
 
-  // 選択中のクエストは常に上部に表示（外せるように）
+  // 選択中のタスクは常に上部に表示（外せるように）
   const sel = TASKS.filter(t => selected.has(t.id)).sort(byName);
   if(sel.length){
     header(T("selectedHeader"), sel.length);
@@ -1910,7 +1910,7 @@ function iconMini(color, letter, title){
   return L.divIcon({ className:"", html:`<div class="minimark" style="background:${color}" title="${(title||"").replace(/"/g,"")}">${letter||""}</div>`,
     iconSize:[13,13], iconAnchor:[6.5,6.5] });
 }
-// 選択クエストの識別ラベル A, B, ... Z, AA ...
+// 選択タスクの識別ラベル A, B, ... Z, AA ...
 function selLabel(i){
   let s = "", n = i + 1;
   while(n > 0){ const r = (n - 1) % 26; s = String.fromCharCode(65 + r) + s; n = Math.floor((n - 1) / 26); }
@@ -2026,7 +2026,7 @@ function renderMarkers(){
     }
   }
 
-  // --- クエスト目標 ---
+  // --- タスク目標 ---
   const noCoordLines = [];
   const seen = new Map();
   const questPts = [];   // ルート用に収集
@@ -2388,7 +2388,7 @@ function renderPrep(){
   const mn = effMapFilter() || curMap;
   const mjp = MAPBY[mn] ? MAPBY[mn].jp : mn;
 
-  // 選択クエストから集約（アイテムid重複は除去、由来クエスト名を保持）
+  // 選択タスクから集約（アイテムid重複は除去、由来タスク名を保持）
   const keys = new Map(), bring = new Map(), collect = new Map();
   const addTo = (map, it, from, extra) => {
     if(!it || !it.id) return;
@@ -2567,7 +2567,7 @@ function setupFloors(md, keep){
     renderMarkers();
     return;
   }
-  // 各階の選択クエストピン数
+  // 各階の選択タスクピン数
   const counts = md.floors.map(() => 0);
   for(const id of selected){
     const t = TASKS.find(x => x.id === id); if(!t) continue;

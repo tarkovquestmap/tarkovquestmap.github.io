@@ -1,4 +1,4 @@
-# EFT Quest Map / タルコフ クエストマップ
+# EFT Quest Map / タルコフ タスクマップ
 
 A free, single-page **pre-raid companion tool for Escape from Tarkov**. Pick the quests
 you're running this raid and it pins their objective locations, plus the extracts you
