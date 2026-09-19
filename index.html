@@ -8,6 +8,18 @@
 <!-- Leaflet (地図ライブラリ) -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- 旧URL(akinoririririri.github.io/tarkov-quest-map)からの引っ越し: 旧ページが保存データを #mig= で渡してくる。
+     新しいURLに同じキーが無いものだけ書き込む(本体スクリプトより前に実行する必要がある) -->
+<script>
+(function(){ try{
+  var m = /^#mig=([A-Za-z0-9_-]+)$/.exec(location.hash); if(!m) return;
+  var o = JSON.parse(decodeURIComponent(escape(atob(m[1].replace(/-/g, "+").replace(/_/g, "/")))));
+  for(var k in o){
+    if(/^eft_qm_/.test(k) && !/^eft_qm_cache_/.test(k) && typeof o[k] === "string" && localStorage.getItem(k) === null) localStorage.setItem(k, o[k]);
+  }
+  history.replaceState(null, "", location.pathname + location.search);
+}catch(e){} })();
+</script>
 <!-- 同梱データ (json.tarkov.dev が全滅した時のフォールバック。「データ更新」で最新化) -->
 <script src="data-snapshot.js" onerror="console.warn('data-snapshot.js なし')"></script>
 
