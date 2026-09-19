@@ -64,6 +64,11 @@
   #langToggle{font-size:11px;padding:3px 9px;flex:0 0 auto}
   #toast{position:absolute;left:50%;bottom:64px;transform:translateX(-50%);z-index:1200;background:#000d;color:var(--text);border:1px solid var(--accent);border-radius:6px;padding:8px 14px;font-size:12px;opacity:0;pointer-events:none;transition:opacity .2s}
   #toast.show{opacity:1}
+  #fbBar{padding-top:8px;padding-bottom:8px}
+  #fbLink{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;text-align:left;padding:8px 12px;background:#2a261c;border:1px solid var(--accent);border-radius:6px}
+  #fbLink:hover{background:#352f22;border-color:var(--accent2)}
+  #fbLink .fbmain{font-size:13px;font-weight:700;color:var(--accent2)}
+  #fbLink .fbsub{font-size:10.5px;color:var(--dim);line-height:1.4}
   #helpBtn{font-size:11px;padding:3px 9px;flex:0 0 auto;border-color:var(--accent);color:var(--accent2)}
   #helpdlg{background:var(--panel);color:var(--text);border:1px solid var(--accent);border-radius:10px;padding:0;width:min(640px,94vw);max-height:90vh}
   #helpdlg::backdrop{background:#000b}
@@ -284,6 +289,10 @@
       <div id="modeHint" class="muted"></div>
     </div>
 
+    <div class="bar" id="fbBar">
+      <button id="fbLink" type="button"><span class="fbmain" data-i18n="fbLink">💬 ご意見・要望を送る</span><span class="fbsub" data-i18n="fbSub">「こんな機能が欲しい」大歓迎です（匿名OK）</span></button>
+    </div>
+
     <div class="bar">
       <div class="row">
         <button id="refresh" class="primary" data-i18n="refresh">データ更新</button>
@@ -291,9 +300,6 @@
       </div>
       <div class="row hidden" data-tip>
         <a href="https://ko-fi.com/tarkovquestmap" target="_blank" rel="noopener" class="muted" style="text-decoration:underline" data-i18n="supportLink">☕ このツールをKo-fiで応援する</a>
-      </div>
-      <div class="row">
-        <a href="#" id="fbLink" class="muted" style="text-decoration:underline" data-i18n="fbLink">💬 ご意見・不具合報告</a>
       </div>
       <div class="row">
         <select id="traderSel"><option value="" data-i18n="traderAll">▼ トレーダー（すべて）</option></select>
@@ -588,7 +594,7 @@ const STR = {
     menuBtn:"☰ メニュー", closeMenu:"閉じる",
     jumpTitle:"地図で表示（選択して、そのマップ・階のピンへ移動）", jumpNoPins:"表示できるピンがありません（座標データなし、または達成済み）",
     helpBtn:"使い方", helpTitle:"使い方", helpClose:"閉じる",
-    fbLink:"💬 ご意見・不具合報告", fbBtn:"ご意見・不具合報告", fbTitle:"ご意見・不具合報告",
+    fbLink:"💬 ご意見・要望を送る", fbSub:"「こんな機能が欲しい」大歓迎です（匿名OK）", fbBtn:"ご意見・不具合報告", fbTitle:"ご意見・不具合報告",
     fbIntro:"欲しい機能・困ったこと・不具合をお知らせください。内容は<b>開発者だけが見られます</b>（公開されません）。ログインや名前・メールアドレスは不要です。個人情報は書かないでください。返信できない場合があります。",
     fbTypeIdea:"💡 要望", fbTypeBug:"🐞 不具合", fbTypeOther:"💬 その他",
     fbMsgLabel:"内容", fbMsgPh:"例: 〇〇のタスクのピンが違う場所に出ます／〇〇の機能が欲しいです",
@@ -674,7 +680,7 @@ const STR = {
 <li>地図の絵が新しいレイアウトと違う（例: Lighthouse）: 地図の絵は tarkov.dev が更新するまで古いままです。地図の上にお知らせが出ます。</li>
 <li>タスク名・アイテム名・マップ名・脱出地点名は、ゲームの表記どおり英語で表示します。</li>
 <li><b>アクセスの集計</b>: 改善の参考にするため、訪問数と「どの機能が何回使われたか」「何分くらい開かれたか」だけを、匿名で数えています（GoatCounter・Cookieなし）。選んだタスクの名前、進捗、入力した文字は送りません。</li>
-<li>欲しい機能・不具合・ご意見は、サイドバーの「💬 ご意見・不具合報告」（またはこのウィンドウ下のボタン）から送れます。</li>
+<li>欲しい機能・不具合・ご意見は、サイドバー上部の「💬 ご意見・要望を送る」ボタン（またはこのウィンドウ下のボタン）から送れます。</li>
 </ul></div></details>
 
 <p class="muted">このツールはゲームに一切アクセスしません（メモリ読取り・注入なし）。tarkov.dev の公開データと地図を使っています（地図: CC BY-NC-SA 4.0）。</p>`,
@@ -802,9 +808,9 @@ const STR = {
     menuBtn:"☰ Menu", closeMenu:"Close",
     jumpTitle:"Show on map (selects it and jumps to its pins on the right map & floor)", jumpNoPins:"No pins to show (no coordinates, or already completed)",
     helpBtn:"Help", helpTitle:"How to use", helpClose:"Close",
-    fbLink:"💬 Feedback / bug report", fbBtn:"Feedback / bug report", fbTitle:"Feedback / bug report",
+    fbLink:"💬 Send feedback / request", fbSub:"Ideas and bug reports welcome (anonymous OK)", fbBtn:"Feedback / bug report", fbTitle:"Feedback / bug report",
     fbIntro:"Tell us about a feature you want, a problem, or a bug. Only the <b>developer can see</b> what you send (it is not public). No login, name or email is needed. Please don't include personal info. Replies may not always be possible.",
-    fbTypeIdea:"💡 Feature retask", fbTypeBug:"🐞 Bug", fbTypeOther:"💬 Other",
+    fbTypeIdea:"💡 Feature request", fbTypeBug:"🐞 Bug", fbTypeOther:"💬 Other",
     fbMsgLabel:"Message", fbMsgPh:"e.g. The pin for task X is in the wrong place / I'd like a feature that…",
     fbInfoLabel:"Info sent along (you can review it)",
     fbCopy:"Copy text", fbSend:"Send", fbCopied:"Copied.", fbEmpty:"Please enter a message.",
@@ -888,7 +894,7 @@ const STR = {
 <li>Map art doesn't match the new layout (e.g. Lighthouse): map art stays old until tarkov.dev updates it; a notice appears above the map.</li>
 <li>Task, item, map and extract names are shown in English exactly as in the game.</li>
 <li><b>Analytics</b>: to guide improvements, we anonymously count only visits, how many times each feature is used, and roughly how long the page stays open (GoatCounter, no cookies). Names of the tasks you select, your progress and anything you type are never sent.</li>
-<li>Feature retasks, bugs and feedback can be sent from "💬 Feedback / bug report" in the sidebar (or the button at the bottom of this window).</li>
+<li>Feature requests, bugs and feedback can be sent with the "💬 Send feedback / request" button at the top of the sidebar (or the button at the bottom of this window).</li>
 </ul></div></details>
 
 <p class="muted">This tool never touches the game (no memory reading or injection). It uses public tarkov.dev data and maps (maps: CC BY-NC-SA 4.0).</p>`,
