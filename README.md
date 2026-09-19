@@ -1,6 +1,6 @@
 # EFT Quest Map / タルコフ タスクマップ
 
-A free, single-page **pre-raid companion tool for Escape from Tarkov**. Pick the quests
+A free, single-page **pre-raid companion tool for Escape from Tarkov**. Pick the tasks
 you're running this raid and it pins their objective locations, plus the extracts you
 choose, on an interactive map — meant for a second monitor.
 
@@ -12,17 +12,17 @@ button top-left to switch language.
 
 ## Features
 
-- Filter quests by trader/map, pin objective + extract locations for the raid you're planning
+- Filter tasks by trader/map, pin objective + extract locations for the raid you're planning
 - Multi-floor maps, hazards, locked doors, switches, boss spawn chances
 - Pre-raid checklist (keys to bring / items to plant / items to find)
-- Quest chain view (prerequisites / unlocks), Kappa/Lightkeeper progress
+- Task chain view (prerequisites / unlocks), Kappa/Lightkeeper progress
 - Custom pins & notes, route ordering, share your setup via a link (no backend)
 - Works offline-ish: caches data locally, falls back to a bundled snapshot if
   tarkov.dev's API is down
 
 ## Credits & license
 
-- Quest/extract/map data: [tarkov.dev](https://tarkov.dev) / `json.tarkov.dev` (community, free)
+- Task/extract/map data: [tarkov.dev](https://tarkov.dev) / `json.tarkov.dev` (community, free)
 - Map art (SVG): tarkov.dev, © Shebuka et al., **CC BY-NC-SA 4.0 (non-commercial)** —
   this project does not run ads or sell access, in order to stay compliant
 - Coordinate-projection logic: [the-hideout/tarkov-dev](https://github.com/the-hideout/tarkov-dev) (MIT)

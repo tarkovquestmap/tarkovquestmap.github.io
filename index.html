@@ -4,14 +4,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>タルコフ タスクマップ</title>
-<meta name="description" content="Escape from Tarkov のタスク目標と脱出地点を地図にピン表示する無料ツール。PvP / PvE / Seasonal 対応。Quest objectives and extracts on the map for Escape from Tarkov (free, PvP / PvE / Seasonal)." />
+<meta name="description" content="Escape from Tarkov のタスク目標と脱出地点を地図にピン表示する無料ツール。PvP / PvE / Seasonal 対応。Task (quest) objectives and extracts on the map for Escape from Tarkov (free, PvP / PvE / Seasonal)." />
 <link rel="canonical" href="https://tarkovquestmap.github.io/" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%97%BA%EF%B8%8F%3C/text%3E%3C/svg%3E" />
 <!-- SNS / Discord などにリンクを貼ったときのプレビュー -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Tarkov Quest Map" />
 <meta property="og:title" content="Tarkov Quest Map — タスク目標＆脱出地点マップ" />
-<meta property="og:description" content="レイド前にタスクを選ぶと、目標と脱出地点が地図に出ます。PvP / PvE / Seasonal 対応・無料・インストール不要。Pick your quests and see objectives and extracts on the map." />
+<meta property="og:description" content="レイド前にタスクを選ぶと、目標と脱出地点が地図に出ます。PvP / PvE / Seasonal 対応・無料・インストール不要。Pick your tasks and see objectives and extracts on the map." />
 <meta property="og:url" content="https://tarkovquestmap.github.io/" />
 <meta property="og:image" content="https://tarkovquestmap.github.io/og-image.png" />
 <meta property="og:image:width" content="1200" />
@@ -724,7 +724,7 @@ const STR = {
   en: {
     appTitle:"EFT Quest Map", langToggleLabel:"日本語",
     refresh:"Refresh data", traderAll:"▼ Trader (all)", mapAll:"▼ Map (all)",
-    followCurrentMap:"[Follow current map tab]", searchPlaceholder:"Search quest name…",
+    followCurrentMap:"[Follow current map tab]", searchPlaceholder:"Search task name…",
     clearSel:"Clear selection", kappaOnly:"Kappa only ★", lvLabel:"Lv", showDone:"Show completed",
     supportLink:"☕ Support this tool on Ko-fi", supportBtn:"☕ Tip",
     supportBtnTitle:"Thanks for using this tool! It'll always stay free. If it's saved you time, a tip on Ko-fi is appreciated — totally optional, no pressure.",
@@ -738,18 +738,18 @@ const STR = {
     brightness:"Brightness", brightnessTitle:"Map brightness", contrast:"Contrast", contrastTitle:"Map contrast",
     reset:"Reset", raidStart:"Start raid",
     guideTitle:"New here?",
-    guideStep1:"Filter by <b>Trader</b> or <b>Map</b> at top-left, then check the quests you're running this raid.",
+    guideStep1:"Filter by <b>Trader</b> or <b>Map</b> at top-left, then check the tasks you're running this raid.",
     guideStep2:"Switch maps with the tabs above. Hover a pin on the map to see the objective description.",
     guideStep3:"In the <b>Extracts</b> section on the left, pick your spawn type (PMC/Scav) and check the extracts you'll use → only those show on the map (green=PMC / blue=Scav / orange=shared).",
     guideStep4:"Move this window to your second monitor and press <b>F11</b> for fullscreen — easiest to read that way.",
-    guideStep5:"After a wipe or new quests, press <b>Refresh data</b> at the top-left.",
+    guideStep5:"After a wipe or new tasks, press <b>Refresh data</b> at the top-left.",
     guideStart:"Get started", loadingInitial:"Loading data…",
     multipleOrNone:"Multiple / none", doneBadge:"✓ done (you)", markDoneTitle:"Mark complete",
     searchPrefix:mn=>`Search: ${mn}`, searchResults:"Search results", noMatch:"No matches", selectedHeader:"Selected",
-    filterHint:"Filter by “Trader” or “Map” above to list quests alphabetically. You can also search by quest name directly.",
-    availableNow:"▶ Available now", noQuestsToShow:"No quests to show (check your filters)",
+    filterHint:"Filter by “Trader” or “Map” above to list tasks alphabetically. You can also search by task name directly.",
+    availableNow:"▶ Available now", noQuestsToShow:"No tasks to show (check your filters)",
     labelSep:" / ",
-    selCount:n=>`${n} quest${n===1?"":"s"} selected`,
+    selCount:n=>`${n} task${n===1?"":"s"} selected`,
     progressDone:(dn,total)=>`Done <b>${dn}</b>/${total}`,
     progressKappa:(kapDn,kapAll)=>` ・ Kappa required <b>${kapDn}</b>/${kapAll}`,
     progressLK:(lkDn,lkAll)=>` ・ Lightkeeper <b>${lkDn}</b>/${lkAll}`,
@@ -767,13 +767,13 @@ const STR = {
     spawnPoint:"Spawn point", sideOther:s=>s,
     optionalTag:" (optional)", conditionsLabel:"Conditions: ",
     noCoordHeader:"No coordinates for this map (check Wiki)",
-    noQuestSelected:"No quests selected",
+    noQuestSelected:"No tasks selected",
     legendSniper:"Sniper line of fire", legendMinefield:"Minefield", legendOtherHazard:"Other hazard",
     legendLockedDoor:"Locked door", legendSwitch:"Switch", legendBoss:"Boss spawn",
     legendPmcSpawn:"PMC spawn", legendScavSpawn:"Scav spawn", legendRoute:"— — Route (numbered order)",
     legendToggle:open=>`Legend ${open?"▲":"▼"}`,
     legendExitLine:fac=>`Extracts (this raid: <b>${fac==="scav"?"Scav":"PMC"}</b>): <span class="dot" style="background:var(--ok)"></span>PMC&nbsp; <span class="dot" style="background:var(--scav)"></span>Scav&nbsp; <span class="dot" style="background:var(--shared)"></span>Co-op (both required) — only extracts checked in “Extracts” show. Floor badge = extract is on a different floor`,
-    legendMarkerLine:'<span class="dot" style="background:#888"></span>Circle=quest objective (letter A/B..)　📌=your note (right-click to add)',
+    legendMarkerLine:'<span class="dot" style="background:#888"></span>Circle=task objective (letter A/B..)　📌=your note (right-click to add)',
     legendHazardLine:"Dashed outline=hazard area. Entering it is dangerous",
     legendColorLine:"Map colors (from tarkov.dev): dark gray=indoors / hatching=stairs・ramp / light blue=water / dashed=map boundary",
     prereqLabel:"Requires: ", nextLabel:"Next: ", andMore:" more",
@@ -783,16 +783,16 @@ const STR = {
     shareLoadedAlert:"Share data loaded.",
     shareLoadFailedAlert:msg=>`Load failed: ${msg}`,
     ttBtn:"Import TarkovTracker", ttTitle:"Import TarkovTracker progress",
-    ttHow:"<ol><li>In TarkovTracker (tarkovtracker.org) settings, save your progress <b>backup (export)</b> JSON</li><li>Choose that file below, or paste its contents</li></ol>Completed / failed quests, completed objectives and your level can be applied.",
+    ttHow:"<ol><li>In TarkovTracker (tarkovtracker.org) settings, save your progress <b>backup (export)</b> JSON</li><li>Choose that file below, or paste its contents</li></ol>Completed / failed tasks, completed objectives and your level can be applied.",
     ttPrivacy:"🔒 The file is processed only inside this browser and is never sent anywhere.",
     ttPasteLabel:"Or paste the JSON contents:",
     ttErrJson:"Could not read this as JSON. Please check it is a backup file.",
     ttErrFormat:"This is not a TarkovTracker backup file.",
     ttErrEmpty:"No importable progress data found.",
     modeLabel:"Game mode", modePvp:"PvP", modePve:"PvE", modeSeasonal:"Seasonal",
-    modeHintPvp:"Regular PvP character. Progress (completed quests, level…) is saved separately per mode.",
-    modeHintPve:"PvE character. Switches to the PvE-specific quests, extracts and boss data (progress saved separately from PvP).",
-    modeHintSeasonal:"Seasonal PvP character (wiped each season). Regular quests use the same data as PvP; seasonal-only Kord Breach quests are not covered yet. Progress saved separately.",
+    modeHintPvp:"Regular PvP character. Progress (completed tasks, level…) is saved separately per mode.",
+    modeHintPve:"PvE character. Switches to the PvE-specific tasks, extracts and boss data (progress saved separately from PvP).",
+    modeHintSeasonal:"Seasonal PvP character (wiped each season). Regular tasks use the same data as PvP; seasonal-only Kord Breach tasks are not covered yet. Progress saved separately.",
     ttTarget:(n,cur)=>cur ? `Import into: <b>${n}</b> (the mode currently shown)` : `Import into: <b>${n}</b> (different from the mode shown now; it takes effect when you switch)`,
     ttOtherMode:(n)=>`Saved to the "${n}" mode. Switch to ${n} with the mode buttons above to see it.`,
     ttEmptyProfile:"This source has no progress in it. Choose a mode that has progress under \"Import mode\" above.",
@@ -801,8 +801,8 @@ const STR = {
     helpBtn:"Help", helpTitle:"How to use", helpClose:"Close",
     fbLink:"💬 Feedback / bug report", fbBtn:"Feedback / bug report", fbTitle:"Feedback / bug report",
     fbIntro:"Tell us about a feature you want, a problem, or a bug. Only the <b>developer can see</b> what you send (it is not public). No login, name or email is needed. Please don't include personal info. Replies may not always be possible.",
-    fbTypeIdea:"💡 Feature request", fbTypeBug:"🐞 Bug", fbTypeOther:"💬 Other",
-    fbMsgLabel:"Message", fbMsgPh:"e.g. The pin for quest X is in the wrong place / I'd like a feature that…",
+    fbTypeIdea:"💡 Feature retask", fbTypeBug:"🐞 Bug", fbTypeOther:"💬 Other",
+    fbMsgLabel:"Message", fbMsgPh:"e.g. The pin for task X is in the wrong place / I'd like a feature that…",
     fbInfoLabel:"Info sent along (you can review it)",
     fbCopy:"Copy text", fbSend:"Send", fbCopied:"Copied.", fbEmpty:"Please enter a message.",
     fbSent:"Sent. Thank you for your feedback!", fbSending:"Sending…", fbWait:"Please wait a moment before sending another.", fbSendErr:"Could not send. Check your connection, or use \"Open the form directly\" below.", fbDirect:"Open the form directly",
@@ -810,24 +810,24 @@ const STR = {
     helpBody:`
 <details open><summary>1. Quick start</summary><div><ol>
 <li>Set the <b>Game mode</b> at the top-left (PvP / PvE / Seasonal) to the one you play.</li>
-<li>In the sidebar, filter by <b>Trader</b> or <b>Map</b> and check the <b>quests you're running this raid</b>.</li>
-<li>Switch maps with the tabs on top. The objectives of your selected quests show as <b>pins</b>. Hover a pin to see the description, conditions, prerequisite and next quests.</li>
+<li>In the sidebar, filter by <b>Trader</b> or <b>Map</b> and check the <b>tasks you're running this raid</b>.</li>
+<li>Switch maps with the tabs on top. The objectives of your selected tasks show as <b>pins</b>. Hover a pin to see the description, conditions, prerequisite and next tasks.</li>
 <li>In the <b>Extracts</b> section, check the extracts you'll use (→ 5.).</li>
 <li>Move the window to your second monitor and press <span class="k">F11</span> for fullscreen.</li>
 </ol></div></details>
 
 <details><summary>2. Game modes (PvP / PvE / Seasonal)</summary><div>
-<p>Each mode is a separate character in the game, so this tool <b>saves progress per mode</b> (completed/failed quests, level, selected quests, extract picks). Switching reloads the page.</p>
+<p>Each mode is a separate character in the game, so this tool <b>saves progress per mode</b> (completed/failed tasks, level, selected tasks, extract picks). Switching reloads the page.</p>
 <ul>
 <li><b>PvP</b>: the regular PvP character.</li>
-<li><b>PvE</b>: switches to the PvE-specific quests ([PVE ZONE]), extracts, bosses and spawns.</li>
-<li><b>Seasonal</b>: the seasonal (wiped) character. No separate data feed exists, so regular quests use the PvP data. <b>Seasonal-only Kord Breach quests are not covered</b>.</li>
+<li><b>PvE</b>: switches to the PvE-specific tasks ([PVE ZONE]), extracts, bosses and spawns.</li>
+<li><b>Seasonal</b>: the seasonal (wiped) character. No separate data feed exists, so regular tasks use the PvP data. <b>Seasonal-only Kord Breach tasks are not covered</b>.</li>
 </ul></div></details>
 
 <details><summary>3. Reading the map</summary><div><ul>
 <li><b>Floor buttons</b> (above the map): switch floors on multi-level maps. When viewing an upper floor, the 1st floor is drawn faintly underneath for orientation. The number on each button is the count of your selected pins on that floor.</li>
-<li><b>Pin colors and letters</b>: each quest gets a color and a letter (A, B, C…), matching the same letter in the quest list.</li>
-<li><b>📍 button</b> (on each quest row): selects the quest, switches to the right map and floor if needed, and moves the map to its pins (a ring flashes around them).</li>
+<li><b>Pin colors and letters</b>: each task gets a color and a letter (A, B, C…), matching the same letter in the task list.</li>
+<li><b>📍 button</b> (on each task row): selects the task, switches to the right map and floor if needed, and moves the map to its pins (a ring flashes around them).</li>
 <li><b>Legend</b>: "Legend ▼" at the bottom-left explains the symbols and colors.</li>
 <li><b>Layers</b>: in "Display layers / Share", toggle transits, hazards, locked doors, switches, bosses and spawns.</li>
 <li><b>Route numbers</b>: when enabled, pins get ①②③… in a shortest-path order joined by a line.</li>
@@ -835,14 +835,14 @@ const STR = {
 <li><b>Brightness / contrast</b>: sliders at the top-left of the map.</li>
 </ul></div></details>
 
-<details><summary>4. Quest list marks &amp; completion</summary><div><ul>
-<li><span class="k">★</span> … a quest required for the Kappa container. "Kappa only ★" filters to them.</li>
-<li><span class="k">○ / ✓</span> … click to mark a quest complete / undo. Completed quests hide from the list automatically; "Show completed" brings them back.</li>
-<li><span class="k">⚠</span> … a quest with a fail condition (hover, or select the quest, to see it). Includes <b>mutually exclusive quests</b> (completing one fails the other) by name.</li>
-<li><span class="k">✗ locked out</span> … you already completed an exclusive counterpart, so this quest can no longer be taken. Hidden from the list and from "Available now".</li>
-<li><span class="k">✗ failed</span> … a failed quest (set by the TarkovTracker import). Hidden from the list and from "Available now".</li>
-<li>Enter your level in <b>Lv</b> and the "<b>▶ Available now</b>" section lists quests whose prerequisites are done and whose level requirement you meet.</li>
-<li>When playing co-op, quests <b>you selected yourself</b> or <b>received via a share link</b> stay visible with a "✓ done" badge even if completed.</li>
+<details><summary>4. Task list marks &amp; completion</summary><div><ul>
+<li><span class="k">★</span> … a task required for the Kappa container. "Kappa only ★" filters to them.</li>
+<li><span class="k">○ / ✓</span> … click to mark a task complete / undo. Completed tasks hide from the list automatically; "Show completed" brings them back.</li>
+<li><span class="k">⚠</span> … a task with a fail condition (hover, or select the task, to see it). Includes <b>mutually exclusive tasks</b> (completing one fails the other) by name.</li>
+<li><span class="k">✗ locked out</span> … you already completed an exclusive counterpart, so this task can no longer be taken. Hidden from the list and from "Available now".</li>
+<li><span class="k">✗ failed</span> … a failed task (set by the TarkovTracker import). Hidden from the list and from "Available now".</li>
+<li>Enter your level in <b>Lv</b> and the "<b>▶ Available now</b>" section lists tasks whose prerequisites are done and whose level requirement you meet.</li>
+<li>When playing co-op, tasks <b>you selected yourself</b> or <b>received via a share link</b> stay visible with a "✓ done" badge even if completed.</li>
 </ul></div></details>
 
 <details><summary>5. Choosing extracts</summary><div>
@@ -850,22 +850,22 @@ const STR = {
 </div></details>
 
 <details><summary>6. Pre-raid check</summary><div>
-<p>The "Pre-raid check" panel lists what your selected quests need. Row checkboxes are saved ("Reset" clears them).</p>
+<p>The "Pre-raid check" panel lists what your selected tasks need. Row checkboxes are saved ("Reset" clears them).</p>
 <ul><li>🔑 keys to bring / 📤 items to bring or plant / 📥 items to collect in raid (FiR = must be found in raid)</li></ul>
 <p>The <b>raid timer</b> above the map counts down the map's time limit (yellow at 5 min left, red at 2 min).</p>
 </div></details>
 
 <details><summary>7. Story chapters</summary><div>
-<p>Besides the trader quests, there is an <b>objective checklist</b> for the story chapters (Tour / Falling Skies / Batya / The Unheard / Blue Fire / They Are Already Here / Accidental Witness / The Labyrinth / The Ticket / Boreas). Open <b>"Story"</b> in the sidebar to see each chapter's objectives.</p>
+<p>Besides the trader tasks, there is an <b>objective checklist</b> for the story chapters (Tour / Falling Skies / Batya / The Unheard / Blue Fire / They Are Already Here / Accidental Witness / The Labyrinth / The Ticket / Boreas). Open <b>"Story"</b> in the sidebar to see each chapter's objectives.</p>
 <ul>
 <li>Check objectives to record your progress (saved separately per mode). There are also "Complete all main objectives" and "Clear all" buttons.</li>
 <li>Story objectives have <b>no coordinate data, so no pins appear on the map</b>. Descriptions are in English as shown in-game.</li>
-<li>Trader quests that require a story objective get a <span class="k">📖</span> mark (unmet ones list the requirement; ✓ when met).</li>
+<li>Trader tasks that require a story objective get a <span class="k">📖</span> mark (unmet ones list the requirement; ✓ when met).</li>
 <li>The TarkovTracker import also applies chapter completion.</li>
 </ul></div></details>
 
 <details><summary>8. TarkovTracker import</summary><div>
-<p>For people who already track progress on TarkovTracker: apply completed quests, failed quests, completed objectives and your level in one go.</p>
+<p>For people who already track progress on TarkovTracker: apply completed tasks, failed tasks, completed objectives and your level in one go.</p>
 <ol>
 <li>In TarkovTracker (tarkovtracker.org) settings, save the backup (export) <b>.json</b>.</li>
 <li>Open "Display layers / Share" here, press <b>Import TarkovTracker</b> and choose the file (or paste it).</li>
@@ -875,21 +875,21 @@ const STR = {
 </div></details>
 
 <details><summary>9. Share links</summary><div>
-<p>"Create share link" copies the current state (mode, selected quests, completions, level, custom pins, map, extract picks) as a URL. A friend who opens it, or pastes it into "Load code", gets the same state. Failed quests and completed objectives are not shared.</p>
+<p>"Create share link" copies the current state (mode, selected tasks, completions, level, custom pins, map, extract picks) as a URL. A friend who opens it, or pastes it into "Load code", gets the same state. Failed tasks and completed objectives are not shared.</p>
 </div></details>
 
 <details><summary>10. Refreshing data &amp; troubleshooting</summary><div><ul>
-<li><b>Refresh data</b>: press it after a wipe or when new quests are added. It updates quests, extracts, boss spawns, etc. (it also refreshes automatically about once a day).</li>
+<li><b>Refresh data</b>: press it after a wipe or when new tasks are added. It updates tasks, extracts, boss spawns, etc. (it also refreshes automatically about once a day).</li>
 <li>If data won't load: check your connection and press "Refresh data". If it can't be fetched, the bundled data is used and "⚠ stale" is shown.</li>
 <li>Map is black: the image server is busy — wait a moment and reload.</li>
 <li>Map art doesn't match the new layout (e.g. Lighthouse): map art stays old until tarkov.dev updates it; a notice appears above the map.</li>
-<li>Quest, item, map and extract names are shown in English exactly as in the game.</li>
-<li>Feature requests, bugs and feedback can be sent from "💬 Feedback / bug report" in the sidebar (or the button at the bottom of this window).</li>
+<li>Task, item, map and extract names are shown in English exactly as in the game.</li>
+<li>Feature retasks, bugs and feedback can be sent from "💬 Feedback / bug report" in the sidebar (or the button at the bottom of this window).</li>
 </ul></div></details>
 
 <p class="muted">This tool never touches the game (no memory reading or injection). It uses public tarkov.dev data and maps (maps: CC BY-NC-SA 4.0).</p>`,
     ttModeLabel:"Game mode:", ttModePvp:"PvP", ttModePve:"PvE", ttModeSeasonal:"Seasonal",
-    ttSummary:(lv,c,cKnown,f,o,s)=>`Level <b>${lv||"-"}</b> / completed quests <b>${c}</b> (${cKnown} recognized here) / failed <b>${f}</b> / completed objectives <b>${o}</b> / story objectives <b>${s}</b>`,
+    ttSummary:(lv,c,cKnown,f,o,s)=>`Level <b>${lv||"-"}</b> / completed tasks <b>${c}</b> (${cKnown} recognized here) / failed <b>${f}</b> / completed objectives <b>${o}</b> / story objectives <b>${s}</b>`,
     storySection:"Story", storyHint:"Objective checklist for the story chapters (no map pins — there is no coordinate data). Descriptions are in English as shown in-game.",
     storyNone:"Could not load the story data (press Refresh data).", storyOptional:"optional",
     storyDoneAll:"Complete all main objectives", storyClear:"Clear all", storyReqLabel:"Requires story objective:",
@@ -899,7 +899,7 @@ const STR = {
     ttDoneMsg:(c,f,o,s)=>`Imported: ${c} completed / ${f} failed / ${o} objectives / ${s} story objectives`,
     ttUndoneMsg:"Restored.",
     failBadge:"✗ failed", lockedBadge:"✗ locked out",
-    failExclusive:(n)=>`This quest fails if you complete: ${n}`,
+    failExclusive:(n)=>`This task fails if you complete: ${n}`,
     failGenShoot:"Has a fail condition about killing certain targets", failGenStanding:"May fail depending on trader standing",
     failGenPlant:"Has a fail condition about placing items", failGenUse:"Has a fail condition about using items",
     failGenExtract:"Fails if you die or leave the raid (other than extracting)", failGenVisit:"Has a fail condition", failGenOther:"Has a fail condition",
@@ -932,7 +932,7 @@ const STR = {
     objExtract:"Extract from location", objBuildWeapon:"Build weapon", objUseItem:"Use item",
     objSellItem:"List on flea market", objExperience:"Achieve condition", objSkill:"Reach skill level",
     objTraderLevel:"Trader loyalty level", objTraderStanding:"Trader standing",
-    objTaskStatus:"Other quest status", objDialogue:"Dialogue", objGlobalVariable:"Progress flag",
+    objTaskStatus:"Other task status", objDialogue:"Dialogue", objGlobalVariable:"Progress flag",
   },
 };
 function T(key, ...args){
@@ -1062,7 +1062,7 @@ const canonMap = m => m ? (MAP_ALIAS[m] || m) : m;
 const MAP_ART_NOTE = {
   lighthouse: {
     ja: { text: "この地図の絵は 1.1.5.0 ライトハウス改修前のレイアウトです（tarkov.dev 未更新）。タスク座標データ自体は最新。", linkText: "最新レイアウト参考(reemr.se)" },
-    en: { text: "This map's art is still the pre-1.1.5.0 Lighthouse layout (tarkov.dev hasn't updated it yet). Quest coordinate data itself is current.", linkText: "Reference layout (reemr.se)" },
+    en: { text: "This map's art is still the pre-1.1.5.0 Lighthouse layout (tarkov.dev hasn't updated it yet). Task coordinate data itself is current.", linkText: "Reference layout (reemr.se)" },
     url: "https://reemr.se/Lighthouse/",
   },
 };
