@@ -38,6 +38,8 @@
 </script>
 <!-- 同梱データ (json.tarkov.dev が全滅した時のフォールバック。「データ更新」で最新化) -->
 <script src="data-snapshot.js" onerror="console.warn('data-snapshot.js なし')"></script>
+<!-- 匿名のアクセス集計 (GoatCounter: Cookieなし・個人を特定しない)。ローカルのファイルとして開いたときは送られない -->
+<script data-goatcounter="https://tarkovtaskmap.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 <style>
   :root{
@@ -671,6 +673,7 @@ const STR = {
 <li>地図が真っ黒: 画像サーバーが混んでいます。少し待って再読み込み。</li>
 <li>地図の絵が新しいレイアウトと違う（例: Lighthouse）: 地図の絵は tarkov.dev が更新するまで古いままです。地図の上にお知らせが出ます。</li>
 <li>タスク名・アイテム名・マップ名・脱出地点名は、ゲームの表記どおり英語で表示します。</li>
+<li><b>アクセスの集計</b>: 改善の参考にするため、訪問数と「どの機能が何回使われたか」「何分くらい開かれたか」だけを、匿名で数えています（GoatCounter・Cookieなし）。選んだタスクの名前、進捗、入力した文字は送りません。</li>
 <li>欲しい機能・不具合・ご意見は、サイドバーの「💬 ご意見・不具合報告」（またはこのウィンドウ下のボタン）から送れます。</li>
 </ul></div></details>
 
@@ -884,6 +887,7 @@ const STR = {
 <li>Map is black: the image server is busy — wait a moment and reload.</li>
 <li>Map art doesn't match the new layout (e.g. Lighthouse): map art stays old until tarkov.dev updates it; a notice appears above the map.</li>
 <li>Task, item, map and extract names are shown in English exactly as in the game.</li>
+<li><b>Analytics</b>: to guide improvements, we anonymously count only visits, how many times each feature is used, and roughly how long the page stays open (GoatCounter, no cookies). Names of the tasks you select, your progress and anything you type are never sent.</li>
 <li>Feature retasks, bugs and feedback can be sent from "💬 Feedback / bug report" in the sidebar (or the button at the bottom of this window).</li>
 </ul></div></details>
 
@@ -950,6 +954,25 @@ function applyStaticI18n(){
   if(lt) lt.textContent = T("langToggleLabel");
 }
 applyStaticI18n();
+// 匿名の利用集計(GoatCounter)。「機能が使われた回数」だけを送る。タスク名・進捗・入力した文字は送らない
+const _trackQ = [];
+function trackFlush(){
+  try{
+    const g = window.goatcounter;
+    if(!g || typeof g.count !== "function") return false;
+    while(_trackQ.length){ const p = _trackQ.shift(); g.count({ path:p, title:p, event:true }); }
+    return true;
+  }catch(e){ return false; }
+}
+function track(name){ if(_trackQ.length < 50) _trackQ.push(name); trackFlush(); }
+(function(){   // 集計スクリプトの読み込み完了を待って、たまった分を送る（広告ブロック等で読めないときは諦める）
+  let n = 0; const iv = setInterval(() => { if(trackFlush() || ++n > 40) clearInterval(iv); }, 500);
+})();
+track("load/mode/" + MODE); track("load/lang/" + LANG);
+(function(){   // 使用時間: タブが見えている時間を数え、5・15・30・60分に達したとき1回ずつだけ送る
+  let sec = 0; const marks = { 300:"time/5min", 900:"time/15min", 1800:"time/30min", 3600:"time/60min" };
+  setInterval(() => { if(document.hidden) return; sec += 10; if(marks[sec]) track(marks[sec]); }, 10000);
+})();
 document.getElementById("langToggle").onclick = () => {
   LANG = (LANG === "ja") ? "en" : "ja";
   try{ localStorage.setItem("eft_qm_lang", LANG); }catch(e){}
@@ -1723,6 +1746,7 @@ function questRow(t){
   cb.type = "checkbox"; cb.checked = selected.has(t.id);
   cb.onchange = () => {
     cb.checked ? selected.add(t.id) : selected.delete(t.id);
+    if(cb.checked) track("use/select-task");
     saveSel(); renderTabs(); refreshFloors(); renderLegend(); renderPrep(); updateSelInfo();
     renderQuestList();
   };
@@ -1764,6 +1788,7 @@ function toast(msg){
   toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
 }
 async function focusQuest(t){
+  track("use/jump-to-task");
   document.getElementById("app").classList.remove("sb-open");   // 狭い画面ではメニューを閉じて地図を見せる
   const shown = m => !objHidden(m.obj);
   const cnt = mn => MAPBY[mn] ? (t.byMap[mn] || []).filter(shown).length : 0;
@@ -2545,7 +2570,7 @@ async function loadMap(){
   map.fitBounds(bounds);
 
   // 右クリックでカスタムピン追加
-  map.on("contextmenu", (ev) => addCustomPin(ev.latlng));
+  map.on("contextmenu", (ev) => { track("use/custom-pin"); addCustomPin(ev.latlng); });
 
   showMapNote(curMap);
   renderExits();     // 現在マップの脱出候補リスト
@@ -2819,6 +2844,11 @@ document.getElementById("brightreset").onclick = () => { view = { bright:1, cont
 const SHOW_TIP = false;
 if(SHOW_TIP) document.querySelectorAll("[data-tip]").forEach(el => el.classList.remove("hidden"));
 
+// 利用集計: 主なボタンが押された回数だけを数える（押した内容は送らない）
+[["sharemake","use/share-create"], ["shareload","use/share-load"], ["ttimport","use/tt-import-open"], ["ttrun","use/tt-import-run"],
+ ["refresh","use/refresh-data"], ["raidstart","use/raid-timer"], ["helpBtn","use/help-open"], ["fbLink","use/feedback-open"]
+].forEach(([id, ev]) => { const el = document.getElementById(id); if(el) el.addEventListener("click", () => track(ev)); });
+document.getElementById("opt_route").addEventListener("change", e => { if(e.target.checked) track("use/route-on"); });
 // 使い方ダイアログ
 document.getElementById("helpBtn").onclick = () => {
   const dlg = document.getElementById("helpdlg");
