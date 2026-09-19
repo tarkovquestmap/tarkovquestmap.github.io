@@ -287,7 +287,7 @@
         <button id="refresh" class="primary" data-i18n="refresh">データ更新</button>
         <span id="datainfo" class="muted"></span>
       </div>
-      <div class="row">
+      <div class="row hidden" data-tip>
         <a href="https://ko-fi.com/tarkovquestmap" target="_blank" rel="noopener" class="muted" style="text-decoration:underline" data-i18n="supportLink">☕ このツールをKo-fiで応援する</a>
       </div>
       <div class="row">
@@ -407,7 +407,7 @@
     <div id="mapwrap">
       <button id="menuBtn" class="primary" data-i18n="menuBtn">☰ メニュー</button>
       <div id="map"></div>
-      <a id="supportBtn" href="https://ko-fi.com/tarkovquestmap" target="_blank" rel="noopener" data-i18n-title="supportBtnTitle">
+      <a id="supportBtn" class="hidden" data-tip href="https://ko-fi.com/tarkovquestmap" target="_blank" rel="noopener" data-i18n-title="supportBtnTitle">
         <span class="main" data-i18n="supportBtn">☕ Support</span>
         <span class="sub" data-i18n="supportBtnSub">Thanks for using this tool!</span>
       </a>
@@ -2814,6 +2814,11 @@ document.getElementById("lvlin").onchange = (e) => {
 document.getElementById("bright").oninput = (e) => { view.bright = parseFloat(e.target.value); applyView(); saveView(); };
 document.getElementById("contrast").oninput = (e) => { view.contrast = parseFloat(e.target.value); applyView(); saveView(); };
 document.getElementById("brightreset").onclick = () => { view = { bright:1, contrast:1 }; applyView(); saveView(); };
+// チップ(Ko-fi)の表示。寄付の受け取りが実装できるまで false（HTML側は data-tip + hidden で隠してある）。
+// 表示するときは true にする。README.md の「Support this project」も戻すこと。
+const SHOW_TIP = false;
+if(SHOW_TIP) document.querySelectorAll("[data-tip]").forEach(el => el.classList.remove("hidden"));
+
 // 使い方ダイアログ
 document.getElementById("helpBtn").onclick = () => {
   const dlg = document.getElementById("helpdlg");
