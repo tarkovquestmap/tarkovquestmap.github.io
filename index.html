@@ -512,7 +512,13 @@
    r=coordinateRotation(度), b=bounds, sb=svgBounds(任意),
    svg=SVGパス, lyr=表示するSVGレイヤーID, tile=タイルURL(SVGが無い時) */
 /* ---------- 多言語対応 (i18n) ---------- */
-let LANG = localStorage.getItem("eft_qm_lang") || "ja";
+// 初回の言語: 保存された選択があればそれ、なければブラウザの言語（日本語なら日本語、それ以外は英語）
+let LANG = (function(){
+  let s = null; try{ s = localStorage.getItem("eft_qm_lang"); }catch(e){}
+  if(s === "ja" || s === "en") return s;
+  const nl = String((navigator.languages && navigator.languages[0]) || navigator.language || "ja").toLowerCase();
+  return nl.startsWith("ja") ? "ja" : "en";
+})();
 /* ゲームモード: PvP / PvE / Seasonal は別キャラ＝進行状況が別。
    PvP は従来のキー名のまま(既存データを引き継ぐ)、他は末尾に _pve / _seasonal を付けて分離する。
    データ元: PvE は json.tarkov.dev/pve/*(タスク・脱出地点・ボス等が別)、
